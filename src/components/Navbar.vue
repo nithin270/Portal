@@ -6,8 +6,8 @@
             <span class="nav-title">NVS</span>
             </router-link>
             <ul class="right alignment">
-                <li><router-link to="/Login">Login</router-link></li>
-                <li><router-link to="/SignUp">SignUp</router-link></li>
+                <li v-if="!user"><router-link to="/Login">Login</router-link></li>
+                <li v-if="!user"><router-link to="/SignUp">SignUp</router-link></li>
             </ul>
         </div>
         </nav>
@@ -15,7 +15,20 @@
 </template>
 <script>
 export default {
-    name:'Navbar'
+    name:'Navbar',
+data(){
+        return{
+          user: null
+        }
+},
+created(){
+firebase.auth().onAuthStateChanged((authUser) => {
+  if (authUser) {
+    this.user = authUser
+  }else{
+  this.user = null
+  }
+});
 }
 </script>
 <style scoped>
