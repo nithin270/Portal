@@ -75,7 +75,7 @@ methods:{
             .then(cred=>{
                 console.log(cred.user.uid)
             })
-           .catch(function(error) {
+           .catch((error) => {
                 var message=error.message
                 alert(message)
                 //this.Feedback=message
